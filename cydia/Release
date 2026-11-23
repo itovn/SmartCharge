@@ -1,0 +1,16 @@
+Origin: SmartCharge
+Label: SmartCharge
+Suite: stable
+Version: 1.0
+Codename: ios6
+Architectures: iphoneos-arm
+Components: main
+Description: SmartCharge - gioi han muc sac, pin nghi khi cam sac, lich xa pin (iOS 6) - https://itovn.github.io/SmartCharge/
+MD5Sum:
+ 6a945415f71045a6f6915c7511f1880e 775 Packages
+ 8627fa7e14ee6051e4dbfd9d6e706a1c 501 Packages.gz
+ 8ab46025da235a4702bf2c49f8b50220 565 Packages.bz2
+SHA256:
+ 41ea6fe94589b19141c8a26fcd4f064a18f8995a181eb42aeb345bd2457dba1c 775 Packages
+ 5a57281a86c1ad09019d9511527e50698cd65bc412033d024a80e10e11a7bd07 501 Packages.gz
+ 0c5c715826325327b657de0d8591a3626fc29dc244e9066d3064f77ff3b1451e 565 Packages.bz2

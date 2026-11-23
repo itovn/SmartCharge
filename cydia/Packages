@@ -1,0 +1,18 @@
+Package: vn.smartcharge.tweak
+Version: 1.1.0
+Architecture: iphoneos-arm
+Maintainer: SmartCharge
+Installed-Size: 1264
+Depends: firmware (>= 6.0), preferenceloader, mobilesubstrate
+Filename: debs/vn.smartcharge.tweak_1.1.0_iphoneos-arm.deb
+Size: 535192
+MD5sum: eac1941c395d1abf3352a38ab16ec45a
+SHA1: 9e7f0f47181c1ad9843352670f4bff8883e191ca
+SHA256: c1c2929e929e7c0b51fb197cb478ac11934502f2a42a8b04cf163b1fdd6cc582
+Section: Tweaks
+Description: Gioi han muc sac, pin nghi khi cam sac (may chay thang bang nguon sac), lich xa pin ngay / tuan / thang. Charge limit, battery rests while plugged in, scheduled discharges. iOS 6.
+Author: SmartCharge
+Name: SmartCharge
+Depiction: https://itovn.github.io/SmartCharge/cydia/depiction.html
+Homepage: https://itovn.github.io/SmartCharge/
+

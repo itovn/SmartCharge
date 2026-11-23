@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>SmartCharge</title>
+<!-- Trang mô tả gói trong Cydia (UIWebView iOS 6): không biến CSS, flex, grid; dải màu có tiền tố -webkit- -->
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding: 10px 10px 24px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c2a38;
+  background: #cbd2d8 url(../img/stripes.png) repeat; }
+a { color: #2a6fb7; text-decoration: none; }
+.head { position: relative; padding: 4px 0 6px 76px; min-height: 64px; }
+.head img { position: absolute; left: 0; top: 0; width: 64px; height: 64px; }
+.head b { display: block; font-size: 20px; color: #2f3e50; text-shadow: 0 1px 0 #fff; margin-top: 6px; }
+.head span { font-size: 14px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+h2 { margin: 18px 10px 6px; font-size: 15px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+.group { background: #fff; border: 1px solid #a9b2bc; border-radius: 9px; overflow: hidden;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); }
+.row { padding: 10px 12px; border-top: 1px solid #d9dde2; font-size: 14px; line-height: 19px; }
+.row:first-child { border-top: 0; }
+.row b { color: #1c2a38; }
+.shots { text-align: center; font-size: 0; }
+.shots img { display: inline-block; width: 47%; max-width: 240px; margin: 4px 1%; border-radius: 8px; border: 1px solid #8e9aa6; }
+.foot { margin-top: 16px; text-align: center; font-size: 12px; color: #4c566c; line-height: 17px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+</style>
+</head>
+<body>
+<div class="head">
+  <img src="CydiaIcon.png" alt="">
+  <b>SmartCharge 1.1.0</b>
+  <span>Giữ mức sạc, pin nghỉ khi cắm sạc, lịch xả pin — iOS 6</span>
+</div>
+
+<div class="shots">
+  <img src="../img/shot-settings.jpg" alt="Cài đặt"><img src="../img/shot-alert.jpg" alt="Thông báo">
+</div>
+
+<h2>Bản 1.1.0</h2>
+<div class="group">
+  <div class="row"><b>Tự cập nhật</b>: có bản mới thì SmartCharge tự báo (hoặc Cài đặt › SmartCharge › Kiểm bản mới), bấm «Cập nhật» là tải và cài, xong màn hình chính tự khởi động lại — chỉ cài gói có chữ ký số của người phát hành</div>
+  <div class="row">Nút <b>nhóm Telegram</b> (t.me/tivikit) và trang giới thiệu trong Cài đặt › SmartCharge</div>
+  <div class="row">Nguồn Cydia có chữ ký (khoá công khai đi kèm gói)</div>
+</div>
+
+<h2>Có gì</h2>
+<div class="group">
+  <div class="row"><b>Giới hạn mức sạc</b> (50–100 %): tới mức thì pin nghỉ, máy chạy thẳng bằng nguồn sạc; cắm sạc lúc pin cao hơn mức giữ thì chạy pin về mức</div>
+  <div class="row"><b>Lịch xả</b> ngày / tuần / tháng xuống mức đáy rồi sạc về mức giữ; tự đánh thức máy, xả bù trong 24 giờ; tuỳ chọn hiệu chuẩn (sạc đầy 100 %, nghỉ 30 phút)</div>
+  <div class="row"><b>Bảo vệ pin</b>: ngừng sạc khi nóng, giới hạn dòng sạc, pin ≤ 10 % lúc xả thì sạc ngay</div>
+  <div class="row">Báo <b>sạc không đủ</b> (đo công suất thật); xả kiểu nhịp cho sạc dự phòng khỏi tự tắt</div>
+  <div class="row"><b>Ký hiệu cạnh % pin</b>: →80 sạc tới · ‖ giữ mức · ↓30 xả tới · 43° nóng · ! pin quá thấp</div>
+  <div class="row">Thông báo, hành động <b>Activator</b>, tiếng Việt / English</div>
+</div>
+
+<div class="foot">
+  Cài đặt › SmartCharge sau khi cài. iOS 6 đã jailbreak, đã thử trên iPad 4.<br>
+  <a href="../">itovn.github.io/SmartCharge</a> · <a href="https://github.com/itovn/SmartCharge">GitHub</a> · <a href="https://t.me/tivikit">t.me/tivikit</a>
+</div>
+</body>
+</html>

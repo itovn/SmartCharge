@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SmartCharge — charge limit, battery rests while plugged in, for iOS 6</title>
+<meta name="description" content="SmartCharge: a tweak for jailbroken iOS 6 iPads / iPhones that stay plugged in — charge limit, battery rests (the device runs straight from the charger), daily / weekly / monthly discharges, heat protection.">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="alternate" hreflang="vi" href="./">
+<!-- Written for Safari on iOS 5 / 6: no CSS variables, flex, grid, gap, calc; gradients with -webkit- prefix -->
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1c2a38;
+  background: #cbd2d8 url(img/stripes.png) repeat;
+}
+a { color: #2a6fb7; text-decoration: none; }
+.nav {
+  position: relative; height: 44px; line-height: 44px; text-align: center;
+  background: #dfe6ee;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d4dee9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d4dee9 100%);
+  border-bottom: 1px solid #93a3b5;
+  -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(40, 60, 90, 0.18);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(40, 60, 90, 0.18);
+  font-size: 20px; font-weight: bold; color: #3a4a5e; text-shadow: 0 1px 0 #fff;
+}
+.nav .lang { position: absolute; right: 12px; top: 0; font-size: 15px; font-weight: bold; }
+.wrap { max-width: 620px; margin: 0 auto; padding: 0 10px 30px; }
+.hero { text-align: center; padding: 26px 0 8px; }
+.hero img { width: 120px; height: 120px; }
+.hero h1 { margin: 10px 0 2px; font-size: 32px; color: #2f3e50; text-shadow: 0 1px 0 #fff; }
+.hero p { margin: 4px 16px; font-size: 16px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); line-height: 22px; }
+.hero .ver { display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 11px; font-size: 13px; font-weight: bold; color: #fff;
+  background: #2fa43f; background-image: -webkit-linear-gradient(top, #6fd27a, #2fa43f 55%, #23892f);
+  background-image: linear-gradient(to bottom, #6fd27a, #2fa43f 55%, #23892f);
+  border: 2px solid #fff; -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); }
+.btn { display: block; margin: 10px 6px 0; height: 44px; line-height: 44px; border-radius: 9px; text-align: center;
+  font-size: 17px; font-weight: bold; color: #fff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+  border: 1px solid #1b5aa0;
+  background: #2a78c8;
+  background-image: -webkit-linear-gradient(top, #7cbcf4 0%, #3c8ddc 50%, #2a78c8 50%, #2068b8 100%);
+  background-image: linear-gradient(to bottom, #7cbcf4 0%, #3c8ddc 50%, #2a78c8 50%, #2068b8 100%);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.6); }
+.btn.gray { color: #2f5f93; text-shadow: 0 1px 0 #fff; border-color: #93a3b5;
+  background: #e8edf3;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d6dfe9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d6dfe9 100%); }
+.btn.tg { border-color: #1d7fa8;
+  background: #2aa3d6;
+  background-image: -webkit-linear-gradient(top, #6fd0f5 0%, #36b0e0 50%, #2aa3d6 50%, #1e8fc0 100%);
+  background-image: linear-gradient(to bottom, #6fd0f5 0%, #36b0e0 50%, #2aa3d6 50%, #1e8fc0 100%); }
+h2 { margin: 26px 12px 7px; font-size: 17px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+.group { margin: 0 2px; background: #fff; border: 1px solid #a9b2bc; border-radius: 9px;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); overflow: hidden; }
+.row { position: relative; padding: 11px 12px 11px 50px; border-top: 1px solid #d9dde2; font-size: 15px; line-height: 20px; }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-size: 16px; color: #1c2a38; }
+.row span { color: #5f6f80; }
+.row .ic svg { display: block; }
+.row .ic { position: absolute; left: 10px; top: 11px; width: 29px; height: 29px; border-radius: 7px; overflow: hidden;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
+.row.plain { padding-left: 12px; }
+.row code, .mono { font-family: Menlo, Courier, monospace; font-size: 14px; color: #1c2a38; background: #eef2f6; padding: 1px 4px; border-radius: 3px; word-wrap: break-word; }
+.c1 { background: #2fa43f; background-image: -webkit-linear-gradient(top, #6fd27a, #2fa43f); background-image: linear-gradient(to bottom, #6fd27a, #2fa43f); }
+.c2 { background: #2c7fd6; background-image: -webkit-linear-gradient(top, #6fb8f5, #2c7fd6); background-image: linear-gradient(to bottom, #6fb8f5, #2c7fd6); }
+.c3 { background: #f08a1c; background-image: -webkit-linear-gradient(top, #ffc25a, #f08a1c); background-image: linear-gradient(to bottom, #ffc25a, #f08a1c); }
+.c4 { background: #1d8ea3; background-image: -webkit-linear-gradient(top, #54c6d8, #1d8ea3); background-image: linear-gradient(to bottom, #54c6d8, #1d8ea3); }
+.c5 { background: #e0352b; background-image: -webkit-linear-gradient(top, #ff7b72, #e0352b); background-image: linear-gradient(to bottom, #ff7b72, #e0352b); }
+.c6 { background: #4f4cc9; background-image: -webkit-linear-gradient(top, #8b89f0, #4f4cc9); background-image: linear-gradient(to bottom, #8b89f0, #4f4cc9); }
+.c8 { background: #2c3e52; background-image: -webkit-linear-gradient(top, #5d7590, #2c3e52); background-image: linear-gradient(to bottom, #5d7590, #2c3e52); }
+.shots { text-align: center; font-size: 0; margin: 0 -4px; }
+.shot { display: inline-block; width: 46%; max-width: 280px; margin: 6px 1.5%; vertical-align: top; font-size: 12px; color: #4c566c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+.shot img { display: block; width: 100%; border-radius: 10px; border: 1px solid #8e9aa6;
+  -webkit-box-shadow: 0 2px 6px rgba(30, 50, 80, 0.3); box-shadow: 0 2px 6px rgba(30, 50, 80, 0.3); margin-bottom: 4px; }
+.marks { margin: 0 2px; background: #1b1f24; border: 1px solid #a9b2bc; border-radius: 9px; padding: 8px 12px; color: #fff; font-size: 14px; line-height: 24px; }
+.marks b { display: inline-block; min-width: 76px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 15px; }
+.note { margin: 7px 14px 0; font-size: 13px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); line-height: 18px; }
+.foot { margin: 30px 10px 0; text-align: center; font-size: 13px; color: #4c566c; line-height: 19px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+</style>
+</head>
+<body>
+<div class="nav">SmartCharge<a class="lang" href="./">VI</a></div>
+<div class="wrap">
+
+  <div class="hero">
+    <img src="img/icon.png" alt="SmartCharge icon">
+    <h1>SmartCharge</h1>
+    <p>Keeps the battery at the level you choose while the device stays plugged in — at the limit <b>the battery rests and the device runs straight from the charger</b>. For jailbroken iPads / iPhones on <b>iOS 6</b>.</p>
+    <span class="ver">Version 1.1.0</span>
+  </div>
+
+  <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://itovn.github.io/SmartCharge/cydia/">Add source to Cydia</a>
+  <a class="btn tg" href="https://t.me/tivikit">Telegram group: t.me/tivikit</a>
+  <a class="btn gray" href="https://github.com/itovn/SmartCharge/releases/latest">Download the .deb</a>
+  <p class="note">Cydia source: <span class="mono">https://itovn.github.io/SmartCharge/cydia/</span></p>
+
+  <h2>Screens</h2>
+  <div class="shots">
+    <div class="shot"><img src="img/shot-settings.jpg" alt="Settings › SmartCharge">Settings › SmartCharge: live status, charge limit</div>
+    <div class="shot"><img src="img/shot-alert.jpg" alt="Alert">Alerts: discharge finished, charger too weak, battery hot</div>
+  </div>
+  <p class="note">The device in the screenshots uses Vietnamese; SmartCharge follows the device language.</p>
+
+  <h2>Features</h2>
+  <div class="group">
+    <div class="row"><div class="ic c1"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="5" y="9" width="17" height="11" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="22.5" y="12" width="2" height="5" rx="1" fill="#fff"/><rect x="7.5" y="11.5" width="9" height="6" rx="1" fill="#fff"/></svg></div><b>Charge limit, resting battery</b><span>Pick a limit from 50 to 100 %. At the limit charging stops: the battery rests and the device runs straight from the charger; when it drops below the recharge band it charges again. Plugged in above the limit, the device runs on battery down to it.</span></div>
+    <div class="row"><div class="ic c2"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="6" y="8" width="17" height="15" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="6" y="8" width="17" height="4" fill="#fff"/><rect x="10" y="5.5" width="2" height="5" rx="1" fill="#fff"/><rect x="17" y="5.5" width="2" height="5" rx="1" fill="#fff"/><path d="M13 14.5v5l3-2.5z" fill="#fff"/></svg></div><b>Scheduled discharges</b><span>Daily / weekly / monthly: the device runs on battery while plugged in down to the floor, then charges back to the limit — a more accurate % reading. Asleep at the time? It wakes up; missed it (device off)? It catches up within 24 hours. Optional <b style="display:inline">calibration</b>: charge to 100 %, rest 30 minutes, then back to the limit.</span></div>
+    <div class="row"><div class="ic c5"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="12.5" y="5" width="4" height="13" rx="2" fill="#fff"/><circle cx="14.5" cy="20" r="4.2" fill="#fff"/></svg></div><b>Battery care</b><span>Pauses charging when the battery is hot (≥ 42 °C by default, resumes at ≤ 38 °C), charge-rate limit; at ≤ 10 % while discharging it charges right away. On first plug-in it self-tests the power driver and disables itself on unsupported devices.</span></div>
+    <div class="row"><div class="ic c3"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M16 4L8 16h5.5l-1.5 9 8-12h-5.5z" fill="#fff"/></svg></div><b>Weak chargers, power banks</b><span>Measures the real charger power and warns «Charger too weak» when a cable / port / charger sags (the battery tops up the difference). While discharging it pulses the charger input so power banks do not switch off.</span></div>
+    <div class="row"><div class="ic c8"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="4" y="11" width="13" height="7" rx="1.5" fill="none" stroke="#fff" stroke-width="1.6"/><rect x="5.8" y="12.8" width="7" height="3.4" fill="#fff"/><rect x="20" y="10.5" width="2" height="8" fill="#fff"/><rect x="23.5" y="10.5" width="2" height="8" fill="#fff"/></svg></div><b>Status bar mark</b><span>A mark next to the battery % shows what SmartCharge is doing — on the home screen, the lock screen and inside every app.</span></div>
+    <div class="row"><div class="ic c6"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M14.5 5a6 6 0 0 0-6 6v5l-2 3h16l-2-3v-5a6 6 0 0 0-6-6z" fill="#fff"/><circle cx="14.5" cy="22" r="2.2" fill="#fff"/></svg></div><b>Alerts, Activator</b><span>Alerts when a discharge finishes, the charger loses power while discharging, the charger is too weak, the battery is hot. Activator: toggle, full charge this time, discharge now, cancel.</span></div>
+    <div class="row"><div class="ic c4"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M14.5 6a8.5 8.5 0 1 0 8.3 10.3h-2.7a6 6 0 1 1-1.5-6.2l-2.6 2.6H23V5.6l-2.6 2.6A8.5 8.5 0 0 0 14.5 6z" fill="#fff"/></svg></div><b>Self-updating, bilingual</b><span>Tells you about new versions and installs them — only packages signed by the publisher. Vietnamese / English, following the device language (or set manually).</span></div>
+  </div>
+
+  <h2>Status bar marks</h2>
+  <div class="marks">
+    <b>78%→80</b> charging to 80 %<br>
+    <b>80%‖</b> holding, battery resting<br>
+    <b>65%↓30</b> discharging to 30 %<br>
+    <b>78% 43°</b> charging paused, battery hot<br>
+    <b>9%!</b> battery critical — charging now
+  </div>
+  <p class="note">Needs Battery Percentage on (General › Usage). Turn the mark off: Settings › SmartCharge › Other.</p>
+
+  <h2>Install</h2>
+  <div class="group">
+    <div class="row plain"><b>1. Add the Cydia source</b><span>Open Cydia → Sources → Edit → Add, enter <code>https://itovn.github.io/SmartCharge/cydia/</code> (or tap «Add source to Cydia» above).</span></div>
+    <div class="row plain"><b>2. Install SmartCharge</b><span>Search «SmartCharge» → Install → Confirm, then tap «Restart SpringBoard».</span></div>
+    <div class="row plain"><b>3. Pick your limit</b><span>Settings › SmartCharge: by default it holds 80 %, recharges at ≤ 75 % and discharges to 30 % once a month (day 1, 19:00).</span></div>
+  </div>
+  <p class="note">Updates: SmartCharge tells you when a new version is out (or Settings › SmartCharge › Check for updates). Uninstalling restores normal charging immediately.</p>
+  <p class="note">For a device that stays plugged in, use a wall charger: power banks tend to switch off when the device idles at the limit.</p>
+
+  <h2>Supported devices</h2>
+  <div class="group">
+    <div class="row plain"><span>Jailbroken iOS 6.0 – 6.1.x (needs MobileSubstrate, PreferenceLoader; Activator optional). Tested on iPad 4 (iOS 6.1.3). Other devices: on first plug-in SmartCharge self-tests the power driver and disables itself with a notice if it does not fit.</span></div>
+  </div>
+
+  <h2>Source code</h2>
+  <div class="group">
+    <div class="row plain"><b>Open source — GPL-3.0</b><span><a href="https://github.com/itovn/SmartCharge">github.com/itovn/SmartCharge</a> · C daemon, Objective-C Settings pane and SpringBoard part, Rust update tool (rustls).</span></div>
+  </div>
+
+  <div class="foot">
+    Questions, bug reports: Telegram group <a href="https://t.me/tivikit">t.me/tivikit</a><br>
+    <a href="./">Tiếng Việt</a>
+  </div>
+</div>
+</body>
+</html>

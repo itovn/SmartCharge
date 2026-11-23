@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SmartCharge — giữ mức sạc, pin nghỉ khi cắm sạc cho iOS 6</title>
+<meta name="description" content="SmartCharge: tweak cho iPad / iPhone iOS 6 đã jailbreak cắm sạc cố định — giới hạn mức sạc, pin nghỉ (máy chạy thẳng bằng nguồn sạc), lịch xả pin ngày / tuần / tháng, bảo vệ pin nóng.">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="alternate" hreflang="en" href="en.html">
+<!-- Viết cho Safari iOS 5 / 6: không biến CSS, flex, grid, gap, calc; dải màu có tiền tố -webkit- -->
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1c2a38;
+  background: #cbd2d8 url(img/stripes.png) repeat;
+}
+a { color: #2a6fb7; text-decoration: none; }
+.nav {
+  position: relative; height: 44px; line-height: 44px; text-align: center;
+  background: #dfe6ee;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d4dee9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d4dee9 100%);
+  border-bottom: 1px solid #93a3b5;
+  -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(40, 60, 90, 0.18);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(40, 60, 90, 0.18);
+  font-size: 20px; font-weight: bold; color: #3a4a5e; text-shadow: 0 1px 0 #fff;
+}
+.nav .lang { position: absolute; right: 12px; top: 0; font-size: 15px; font-weight: bold; }
+.wrap { max-width: 620px; margin: 0 auto; padding: 0 10px 30px; }
+.hero { text-align: center; padding: 26px 0 8px; }
+.hero img { width: 120px; height: 120px; }
+.hero h1 { margin: 10px 0 2px; font-size: 32px; color: #2f3e50; text-shadow: 0 1px 0 #fff; }
+.hero p { margin: 4px 16px; font-size: 16px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); line-height: 22px; }
+.hero .ver { display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 11px; font-size: 13px; font-weight: bold; color: #fff;
+  background: #2fa43f; background-image: -webkit-linear-gradient(top, #6fd27a, #2fa43f 55%, #23892f);
+  background-image: linear-gradient(to bottom, #6fd27a, #2fa43f 55%, #23892f);
+  border: 2px solid #fff; -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2); }
+.btn { display: block; margin: 10px 6px 0; height: 44px; line-height: 44px; border-radius: 9px; text-align: center;
+  font-size: 17px; font-weight: bold; color: #fff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+  border: 1px solid #1b5aa0;
+  background: #2a78c8;
+  background-image: -webkit-linear-gradient(top, #7cbcf4 0%, #3c8ddc 50%, #2a78c8 50%, #2068b8 100%);
+  background-image: linear-gradient(to bottom, #7cbcf4 0%, #3c8ddc 50%, #2a78c8 50%, #2068b8 100%);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.6); }
+.btn.gray { color: #2f5f93; text-shadow: 0 1px 0 #fff; border-color: #93a3b5;
+  background: #e8edf3;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d6dfe9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #eef2f7 50%, #e2e9f1 50%, #d6dfe9 100%); }
+.btn.tg { border-color: #1d7fa8;
+  background: #2aa3d6;
+  background-image: -webkit-linear-gradient(top, #6fd0f5 0%, #36b0e0 50%, #2aa3d6 50%, #1e8fc0 100%);
+  background-image: linear-gradient(to bottom, #6fd0f5 0%, #36b0e0 50%, #2aa3d6 50%, #1e8fc0 100%); }
+h2 { margin: 26px 12px 7px; font-size: 17px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+.group { margin: 0 2px; background: #fff; border: 1px solid #a9b2bc; border-radius: 9px;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); overflow: hidden; }
+.row { position: relative; padding: 11px 12px 11px 50px; border-top: 1px solid #d9dde2; font-size: 15px; line-height: 20px; }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-size: 16px; color: #1c2a38; }
+.row span { color: #5f6f80; }
+.row .ic svg { display: block; }
+.row .ic { position: absolute; left: 10px; top: 11px; width: 29px; height: 29px; border-radius: 7px; overflow: hidden;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
+.row.plain { padding-left: 12px; }
+.row code, .mono { font-family: Menlo, Courier, monospace; font-size: 14px; color: #1c2a38; background: #eef2f6; padding: 1px 4px; border-radius: 3px; word-wrap: break-word; }
+.c1 { background: #2fa43f; background-image: -webkit-linear-gradient(top, #6fd27a, #2fa43f); background-image: linear-gradient(to bottom, #6fd27a, #2fa43f); }
+.c2 { background: #2c7fd6; background-image: -webkit-linear-gradient(top, #6fb8f5, #2c7fd6); background-image: linear-gradient(to bottom, #6fb8f5, #2c7fd6); }
+.c3 { background: #f08a1c; background-image: -webkit-linear-gradient(top, #ffc25a, #f08a1c); background-image: linear-gradient(to bottom, #ffc25a, #f08a1c); }
+.c4 { background: #1d8ea3; background-image: -webkit-linear-gradient(top, #54c6d8, #1d8ea3); background-image: linear-gradient(to bottom, #54c6d8, #1d8ea3); }
+.c5 { background: #e0352b; background-image: -webkit-linear-gradient(top, #ff7b72, #e0352b); background-image: linear-gradient(to bottom, #ff7b72, #e0352b); }
+.c6 { background: #4f4cc9; background-image: -webkit-linear-gradient(top, #8b89f0, #4f4cc9); background-image: linear-gradient(to bottom, #8b89f0, #4f4cc9); }
+.c8 { background: #2c3e52; background-image: -webkit-linear-gradient(top, #5d7590, #2c3e52); background-image: linear-gradient(to bottom, #5d7590, #2c3e52); }
+.shots { text-align: center; font-size: 0; margin: 0 -4px; }
+.shot { display: inline-block; width: 46%; max-width: 280px; margin: 6px 1.5%; vertical-align: top; font-size: 12px; color: #4c566c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+.shot img { display: block; width: 100%; border-radius: 10px; border: 1px solid #8e9aa6;
+  -webkit-box-shadow: 0 2px 6px rgba(30, 50, 80, 0.3); box-shadow: 0 2px 6px rgba(30, 50, 80, 0.3); margin-bottom: 4px; }
+.marks { margin: 0 2px; background: #1b1f24; border: 1px solid #a9b2bc; border-radius: 9px; padding: 8px 12px; color: #fff; font-size: 14px; line-height: 24px; }
+.marks b { display: inline-block; min-width: 76px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 15px; }
+.note { margin: 7px 14px 0; font-size: 13px; color: #4c566c; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); line-height: 18px; }
+.foot { margin: 30px 10px 0; text-align: center; font-size: 13px; color: #4c566c; line-height: 19px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85); }
+</style>
+</head>
+<body>
+<div class="nav">SmartCharge<a class="lang" href="en.html">EN</a></div>
+<div class="wrap">
+
+  <div class="hero">
+    <img src="img/icon.png" alt="Biểu tượng SmartCharge">
+    <h1>SmartCharge</h1>
+    <p>Giữ pin ở mức bạn chọn khi máy cắm sạc cố định — tới mức thì <b>pin nghỉ, máy chạy thẳng bằng nguồn sạc</b>. Cho iPad / iPhone chạy <b>iOS 6</b> đã jailbreak.</p>
+    <span class="ver">Bản 1.1.0</span>
+  </div>
+
+  <a class="btn" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://itovn.github.io/SmartCharge/cydia/">Thêm nguồn vào Cydia</a>
+  <a class="btn tg" href="https://t.me/tivikit">Nhóm Telegram: t.me/tivikit</a>
+  <a class="btn gray" href="https://github.com/itovn/SmartCharge/releases/latest">Tải tệp .deb</a>
+  <p class="note">Nguồn Cydia: <span class="mono">https://itovn.github.io/SmartCharge/cydia/</span></p>
+
+  <h2>Giao diện</h2>
+  <div class="shots">
+    <div class="shot"><img src="img/shot-settings.jpg" alt="Cài đặt › SmartCharge">Cài đặt › SmartCharge: trạng thái sống, mức giữ</div>
+    <div class="shot"><img src="img/shot-alert.jpg" alt="Thông báo">Thông báo khi xả xong, sạc không đủ, pin nóng</div>
+  </div>
+
+  <h2>Tính năng</h2>
+  <div class="group">
+    <div class="row"><div class="ic c1"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="5" y="9" width="17" height="11" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="22.5" y="12" width="2" height="5" rx="1" fill="#fff"/><rect x="7.5" y="11.5" width="9" height="6" rx="1" fill="#fff"/></svg></div><b>Giới hạn mức sạc, pin nghỉ</b><span>Chọn mức giữ 50–100 %. Tới mức thì ngừng sạc: pin nghỉ, máy chạy thẳng bằng nguồn sạc; pin tụt quá khoảng sạc lại thì sạc tiếp. Cắm sạc lúc pin cao hơn mức giữ thì máy chạy pin về mức.</span></div>
+    <div class="row"><div class="ic c2"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="6" y="8" width="17" height="15" rx="2" fill="none" stroke="#fff" stroke-width="2"/><rect x="6" y="8" width="17" height="4" fill="#fff"/><rect x="10" y="5.5" width="2" height="5" rx="1" fill="#fff"/><rect x="17" y="5.5" width="2" height="5" rx="1" fill="#fff"/><path d="M13 14.5v5l3-2.5z" fill="#fff"/></svg></div><b>Lịch xả pin</b><span>Hằng ngày / tuần / tháng: máy chạy bằng pin dù vẫn cắm sạc, tới mức đáy thì tự sạc về mức giữ — số % hiển thị chính xác hơn. Máy ngủ đúng giờ thì tự thức dậy; lỡ giờ (tắt máy) thì xả bù trong 24 giờ. Tuỳ chọn <b style="display:inline">hiệu chuẩn</b>: sạc đầy 100 %, nghỉ 30 phút rồi về mức giữ.</span></div>
+    <div class="row"><div class="ic c5"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="12.5" y="5" width="4" height="13" rx="2" fill="#fff"/><circle cx="14.5" cy="20" r="4.2" fill="#fff"/></svg></div><b>Bảo vệ pin</b><span>Ngừng sạc khi pin nóng (mặc định ≥ 42 °C, sạc lại khi ≤ 38 °C), giới hạn dòng sạc; pin ≤ 10 % lúc đang xả thì sạc lại ngay. Lần đầu cắm sạc tự kiểm tra driver — máy chưa hỗ trợ thì tự tắt điều khiển.</span></div>
+    <div class="row"><div class="ic c3"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M16 4L8 16h5.5l-1.5 9 8-12h-5.5z" fill="#fff"/></svg></div><b>Sạc yếu, sạc dự phòng</b><span>Đo công suất thật của nguồn sạc, báo «Sạc không đủ» khi dây / cổng / cục sạc làm tụt áp (pin tự bù phần thiếu). Lúc xả, ngắt nguồn theo nhịp để sạc dự phòng không tự tắt.</span></div>
+    <div class="row"><div class="ic c8"><svg width="29" height="29" viewBox="0 0 29 29"><rect x="4" y="11" width="13" height="7" rx="1.5" fill="none" stroke="#fff" stroke-width="1.6"/><rect x="5.8" y="12.8" width="7" height="3.4" fill="#fff"/><rect x="20" y="10.5" width="2" height="8" fill="#fff"/><rect x="23.5" y="10.5" width="2" height="8" fill="#fff"/></svg></div><b>Ký hiệu cạnh % pin</b><span>Thanh trạng thái cho biết SmartCharge đang làm gì — ở màn hình chính, màn khoá và trong mọi app.</span></div>
+    <div class="row"><div class="ic c6"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M14.5 5a6 6 0 0 0-6 6v5l-2 3h16l-2-3v-5a6 6 0 0 0-6-6z" fill="#fff"/><circle cx="14.5" cy="22" r="2.2" fill="#fff"/></svg></div><b>Thông báo, Activator</b><span>Báo xả xong, cổng sạc mất điện giữa lúc xả, sạc không đủ, pin nóng. Activator: bật / tắt, sạc đầy lần này, xả ngay, huỷ.</span></div>
+    <div class="row"><div class="ic c4"><svg width="29" height="29" viewBox="0 0 29 29"><path d="M14.5 6a8.5 8.5 0 1 0 8.3 10.3h-2.7a6 6 0 1 1-1.5-6.2l-2.6 2.6H23V5.6l-2.6 2.6A8.5 8.5 0 0 0 14.5 6z" fill="#fff"/></svg></div><b>Tự cập nhật, hai thứ tiếng</b><span>Tự báo khi có bản mới và tự cài — chỉ cài gói có chữ ký số của người phát hành. Tiếng Việt / English theo ngôn ngữ máy (hoặc chọn tay).</span></div>
+  </div>
+
+  <h2>Ký hiệu trên thanh trạng thái</h2>
+  <div class="marks">
+    <b>78%→80</b> đang sạc tới 80 %<br>
+    <b>80%‖</b> giữ mức, pin nghỉ<br>
+    <b>65%↓30</b> đang xả tới 30 %<br>
+    <b>78% 43°</b> ngừng sạc vì pin nóng<br>
+    <b>9%!</b> pin quá thấp — đang sạc lại
+  </div>
+  <p class="note">Cần bật hiện phần trăm pin (Cài đặt chung › Sử dụng). Tắt ký hiệu: Cài đặt › SmartCharge › Khác.</p>
+
+  <h2>Cài đặt</h2>
+  <div class="group">
+    <div class="row plain"><b>1. Thêm nguồn Cydia</b><span>Mở Cydia → Nguồn → Sửa → Thêm, nhập <code>https://itovn.github.io/SmartCharge/cydia/</code> (hoặc chạm nút «Thêm nguồn vào Cydia» ở trên).</span></div>
+    <div class="row plain"><b>2. Cài SmartCharge</b><span>Tìm «SmartCharge» → Cài đặt → Xác nhận, xong bấm «Restart SpringBoard».</span></div>
+    <div class="row plain"><b>3. Chọn mức giữ</b><span>Cài đặt › SmartCharge: mặc định giữ 80 %, sạc lại khi ≤ 75 %, xả hằng tháng (ngày 1, 19:00) xuống 30 %.</span></div>
+  </div>
+  <p class="note">Cập nhật: SmartCharge tự báo khi có bản mới (hoặc Cài đặt › SmartCharge › Kiểm bản mới). Gỡ gói thì máy sạc bình thường ngay.</p>
+  <p class="note">Máy cắm cố định nên dùng sạc cắm tường: sạc dự phòng hay tự tắt khi máy rảnh lúc đang giữ mức.</p>
+
+  <h2>Máy chạy được</h2>
+  <div class="group">
+    <div class="row plain"><span>iOS 6.0 – 6.1.x đã jailbreak (cần MobileSubstrate, PreferenceLoader; Activator không bắt buộc). Đã thử trên iPad 4 (iOS 6.1.3). Máy khác: lần đầu cắm sạc SmartCharge tự kiểm tra driver, không hợp thì tự tắt và báo.</span></div>
+  </div>
+
+  <h2>Mã nguồn</h2>
+  <div class="group">
+    <div class="row plain"><b>Mã nguồn mở — GPL-3.0</b><span><a href="https://github.com/itovn/SmartCharge">github.com/itovn/SmartCharge</a> · daemon C, trang Cài đặt và phần SpringBoard Objective-C, công cụ cập nhật Rust (rustls).</span></div>
+  </div>
+
+  <div class="foot">
+    Hỏi đáp, báo lỗi: nhóm Telegram <a href="https://t.me/tivikit">t.me/tivikit</a><br>
+    <a href="en.html">English</a>
+  </div>
+</div>
+</body>
+</html>

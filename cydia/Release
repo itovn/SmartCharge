@@ -7,10 +7,10 @@ Architectures: iphoneos-arm
 Components: main
 Description: SmartCharge - gioi han muc sac, pin nghi khi cam sac, lich xa pin (iOS 6) - https://itovn.github.io/SmartCharge/
 MD5Sum:
- c388516369dd2e7144a8a92b06d6efef 1633 Packages
- dc377ff388e44c4cb656a98c6e774276 671 Packages.gz
- f3c28ff18d31cc8c1463d682a0f4241d 803 Packages.bz2
+ 4f1572924fb93308264b5ae7543373ed 2491 Packages
+ b3e2eda892ef5bcd324364b3dc6b6ffd 788 Packages.gz
+ e9f557d2e3ae2733e597a5d5e5afb5d1 971 Packages.bz2
 SHA256:
- 6e24b7979c1e3e61d739c6f09f77821eca1b4628f12eb47eb2caacb5a97683aa 1633 Packages
- 38ff6e45f3048d05a8f7ed6cf07060f4a12f788c5b9e0a55678bab95b88887a1 671 Packages.gz
- d7f575beb301fe30e440a7333c73f107edf45e9af56c06b7102605825ad69570 803 Packages.bz2
+ 11097fa4629d6b03b948e78d5ab38e1fc81430880ca5b97b5b7b7b50f1ac59ca 2491 Packages
+ 6924838b6ae832853a5d17f915a4194f013dee01692b41fdd8f0e8ff66456189 788 Packages.gz
+ 3d7f380a24c69e8e76cf933cdc55765ff4a64ebc0123461f701fcdfbe0ee66f4 971 Packages.bz2

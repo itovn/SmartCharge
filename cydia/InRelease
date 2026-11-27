@@ -10,25 +10,25 @@ Architectures: iphoneos-arm
 Components: main
 Description: SmartCharge - gioi han muc sac, pin nghi khi cam sac, lich xa pin (iOS 6) - https://itovn.github.io/SmartCharge/
 MD5Sum:
- c388516369dd2e7144a8a92b06d6efef 1633 Packages
- dc377ff388e44c4cb656a98c6e774276 671 Packages.gz
- f3c28ff18d31cc8c1463d682a0f4241d 803 Packages.bz2
+ 4f1572924fb93308264b5ae7543373ed 2491 Packages
+ b3e2eda892ef5bcd324364b3dc6b6ffd 788 Packages.gz
+ e9f557d2e3ae2733e597a5d5e5afb5d1 971 Packages.bz2
 SHA256:
- 6e24b7979c1e3e61d739c6f09f77821eca1b4628f12eb47eb2caacb5a97683aa 1633 Packages
- 38ff6e45f3048d05a8f7ed6cf07060f4a12f788c5b9e0a55678bab95b88887a1 671 Packages.gz
- d7f575beb301fe30e440a7333c73f107edf45e9af56c06b7102605825ad69570 803 Packages.bz2
+ 11097fa4629d6b03b948e78d5ab38e1fc81430880ca5b97b5b7b7b50f1ac59ca 2491 Packages
+ 6924838b6ae832853a5d17f915a4194f013dee01692b41fdd8f0e8ff66456189 788 Packages.gz
+ 3d7f380a24c69e8e76cf933cdc55765ff4a64ebc0123461f701fcdfbe0ee66f4 971 Packages.bz2
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAEBCAAdFiEE5S+zwNWy0vLMNFVqkk7c1wyeG+YFAmsJLUAACgkQkk7c1wye
-G+aw+AwAhgsJZDahQhxKtchiorahuoAsA0Hnelp932FRjfBfywUZZdIO3rW7PkXT
-rNTOBi+crVfYtf7efi4bqvaRb8wEQl8My3hUBye8LaWOoz9jwCij30p7mYzfUKZH
-b0+0JFL5Pkpee3LvhJ7VI7GKaoYMXCnR0gSQRG4HsjUYMYyNymWNsOrY9xyh3k8b
-fs9EwCnRbEk3Pi0TVDQDbFDnTDOvFzKiMaPMQ2RVMjdq0yYaFtU6hCAC12bJSSh4
-X1FbdmL3A4tUC8BVXMMB4SmiOpr6B409sscJtB9smHxzM2Mab4YzajAB1M27sbmO
-0w3HSmMOhDOFYYWjQvpFszuF5iK410t2HFLdMG/g1yIspzKF8Oegh8r0Yx35EQuz
-QHNpHpO7S9eud9pXwW6vriPKQDbmfTSMpNWEBlFh0vjkqoi2OIe3/zTfLolnlxLu
-Ip8x5DiKEO3gH52lI9IUDrnYAFNiNV+LQ/SeesuywOa42V84ryEexyhI2+PcyN0q
-YAtWFyC0
-=aD6y
+iQGzBAEBCAAdFiEE5S+zwNWy0vLMNFVqkk7c1wyeG+YFAmsJXJ8ACgkQkk7c1wye
+G+aosgwAhh3XRXsCfXaKWKekLgBChPXwXdFUsTfND7svqNhc6CtppFIO4J2uto0p
+xHXKeSoeC67fXKPvbLLem57jMmaNluGk8is3HZOImUXm2EqzD9NExZVMciWQ2iQ3
+k+uXeS8MNApIpXj/df3ieG/bXri7yL8/cRdftmbhyKaJTEjSoBB3papOncMT3Anh
+ul+86gK6RcXrov4wrzic8G/eXAUAgM0o2Fp3seOZsJnXYDqf1KdrKt1hqiWvs2bx
+ZOd6XWdvZhip1uf4oiDDqou/SwY4Fm6NDZSmePRjmtoPRd/G6rBDN98/0GIrh68d
+4jk6vh5pOyE1T0994mJbjRWPIWSFIJ4AGaBpm1RPqIiODR5cxwJzCbsgx7aw85dZ
+3aHCGmHFJ8tFb850jTbrHtrlC/jmbc/1OZqkivgPE5lUnyMj2+j4gnSQiM7S01dp
+2w+q0GZwAJ4Y17wgNObP6ZF7GkpEEHcdT0qzMvF7C6iY42XkG5v3sD3a6SsOKA0y
+Ch5+d6PE
+=542u
 -----END PGP SIGNATURE-----
